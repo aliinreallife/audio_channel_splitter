@@ -26,9 +26,10 @@ def split_stereo_to_mono(input_file: str) -> None:
         raise ValueError("The input file is not a stereo audio file.")
 
     left_channel, right_channel = audio.split_to_mono()
+    base_dir = os.path.dirname(input_file)
     base_name = os.path.splitext(os.path.basename(input_file))[0]
-    left_output = f"{base_name}_left{file_extension}"
-    right_output = f"{base_name}_right{file_extension}"
+    left_output = os.path.join(base_dir, f"{base_name}_left{file_extension}")
+    right_output = os.path.join(base_dir, f"{base_name}_right{file_extension}")
 
     left_channel.export(left_output, format=file_extension[1:])
     print(f"Left channel saved as: {left_output}")
@@ -39,5 +40,5 @@ def split_stereo_to_mono(input_file: str) -> None:
 
 # Usage example
 if __name__ == "__main__":
-    input_file = "a.wav"  # Replace with your actual file name and format
+    input_file = "example/a.wav"  # Replace with your actual file name and format
     split_stereo_to_mono(input_file)
