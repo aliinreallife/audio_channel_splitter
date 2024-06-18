@@ -1,11 +1,24 @@
 from pydub import AudioSegment
 import os
 
-def split_stereo_to_mono(input_file):
-    supported_formats = ['.wav', '.mp3', '.flac']
+
+def split_stereo_to_mono(input_file: str) -> None:
+    """
+    Split a stereo audio file into two mono audio files, one for left channel and one for right channel.
+    The output files will be saved in the same directory as the input file.
+
+    Args:
+        input_file (str): path to the stereo audio file
+    Raises:
+        ValueError: to indicate that the input file format is not supported
+        ValueError: to indicate that the input file is not a two channel stereo audio file
+    """
+    supported_formats = [".wav", ".mp3", ".flac"]
     file_extension = os.path.splitext(input_file)[1].lower()
     if file_extension not in supported_formats:
-        raise ValueError(f"Unsupported file format: {file_extension}. Supported formats are {supported_formats}")
+        raise ValueError(
+            f"Unsupported file format: {file_extension}. Supported formats are {supported_formats}"
+        )
 
     audio = AudioSegment.from_file(input_file)
 
@@ -22,6 +35,7 @@ def split_stereo_to_mono(input_file):
 
     right_channel.export(right_output, format=file_extension[1:])
     print(f"Right channel saved as: {right_output}")
+
 
 # Usage example
 if __name__ == "__main__":
