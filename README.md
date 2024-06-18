@@ -2,7 +2,7 @@
 
 ## Description
 
-**audio_channel_splitter** is a Python tool that splits stereo audio files into separate left and right channel files. It supports various audio formats such as WAV, MP3, and FLAC using the Pydub library without the need for external tools like FFmpeg.
+**audio_channel_splitter** is a Python tool that splits stereo audio files into `separate left and right channel` files. It supports various audio formats such as `WAV`, `MP3`, and `FLAC` using the Pydub library without the need for external tools like FFmpeg.
 
 ## Features
 
@@ -46,9 +46,9 @@
 3. **Output:**
 
     The script will generate two new files in the same directory:
-    - `a_left.wav`
-    - `a_right.wav`
+    - a_left.wav
+    - a_right.wav
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the `MIT` License.
