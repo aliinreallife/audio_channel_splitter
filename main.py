@@ -27,7 +27,11 @@ def split_stereo_to_mono(input_file: str) -> tuple[AudioSegment, AudioSegment]:
 
     audio = AudioSegment.from_file(input_file)
 
-    if audio.channels != 2:
+    if audio.channels == 1:
+        raise ValueError(
+            "The input file is already a mono audio file and cannot be split into stereo channels."
+        )
+    elif audio.channels != 2:
         raise ValueError("The input file is not a stereo audio file.")
 
     right_channel, left_channel = audio.split_to_mono()
@@ -35,17 +39,25 @@ def split_stereo_to_mono(input_file: str) -> tuple[AudioSegment, AudioSegment]:
     return left_channel, right_channel
 
 
-# Usage example
+# Usage example with export functionality
 if __name__ == "__main__":
-    input_file = "example.mp3"  # Replace with your actual file name and format
+
+    input_file = "a.mp3"  # Replace with your actual file name and format
+
     left_channel, right_channel = split_stereo_to_mono(input_file)
 
     # Construct output file paths
     base_name, ext = os.path.splitext(input_file)
-    left_channel_file = f"{base_name}_left{ext}"
-    right_channel_file = f"{base_name}_right{ext}"
+    ext = ext[1:]  # Remove the leading dot
 
-    # Export the mono channels
+    # Check if the format is supported for export
+    if ext not in ["wav", "mp3", "flac"]:
+        raise ValueError(f"The format '{ext}' is not supported for export.")
+
+    left_channel_file = f"{base_name}_left.{ext}"
+    right_channel_file = f"{base_name}_right.{ext}"
+
+    # Export the mono channels using the extracted format
     left_channel.export(left_channel_file, format=ext)
     right_channel.export(right_channel_file, format=ext)
 
