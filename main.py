@@ -46,11 +46,9 @@ if __name__ == "__main__":
 
     left_channel, right_channel = split_stereo_to_mono(input_file)
 
-    # Construct output file paths
     base_name, ext = os.path.splitext(input_file)
-    ext = ext[1:]  # Remove the leading dot
+    ext = ext[1:]
 
-    # Check if the format is supported for export
     if ext not in ["wav", "mp3", "flac"]:
         raise ValueError(f"The format '{ext}' is not supported for export.")
 
