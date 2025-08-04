@@ -16,7 +16,7 @@
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/yourusername/audio_channel_splitter.git
+    git clone https://github.com/aliinreallife/audio_channel_splitter.git
     cd audio_channel_splitter
     ```
 
